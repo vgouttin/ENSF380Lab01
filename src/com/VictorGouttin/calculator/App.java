@@ -8,7 +8,7 @@ public class App {
 	    Scanner scanner = new Scanner(System.in);
 	    
 	    while (true) {
-	        System.out.println("\nEnter operation (add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial) or 'exit' to quit:");
+	        System.out.println("\nEnter operation (add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial, permutation) or 'exit' to quit:");
 	        String operation = scanner.next();
 	        
 	        if (operation.equalsIgnoreCase("exit")) {
@@ -39,6 +39,9 @@ public class App {
 	                case "pow":
 	                    System.out.println("Result: " + power(num1, num2));
 	                    break;
+	                case "permutation":
+	                	System.out.println("Result: " + permutations((int)num1, (int)num2));
+	                	break;
 	                default:
 	                    System.out.println("Invalid operation.");
 	                    break;
@@ -183,6 +186,37 @@ public class App {
 
     // Tangent function
     public static double tan(double angleRadians) {
-        return Math.tan(angleRadians);
+        return Math.tan(Math.toRadians(angleRadians));// Recursive method to calculate permutations without replacement
     }
+    public static long permutations(int n, int k) {
+           // Error checking
+            if (k < 0 || k > 100) {
+                System.out.println("Error: Number of selected items must be between 0 and 100.");
+                return 0;
+            }
+            if (n < 0) {
+                System.out.println("Error: Total number of elements cannot be negative.");
+                return 0;
+            }
+            if (k > n) {
+                System.out.println("Error: Number of selected items cannot exceed total number of elements.");
+                return 0;
+            }
+            
+            // Base case for recursion
+            if (k == 0) {
+                return 1;
+            }
+            
+            // Recursive calculation
+            return n * permutations(n - 1, k - 1);
+           
+            /*my alternative solution is this but I ran out of time and didnt test it...
+             *for (int i = 0; i < k; i++) {
+        	 *result *= (n - i);
+        	 *}
+        	 *return result; 
+        	*/
     }
+    
+}
